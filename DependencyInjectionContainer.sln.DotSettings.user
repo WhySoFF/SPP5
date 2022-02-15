@@ -1,0 +1,15 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=40b43512_002D1912_002D4c0d_002D9ac7_002Dee126ae59552/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ResolveCyclingDepencies #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::3965599C-9C7A-40A1-95DD-9A1A96268B3A::net5.0::LibraryTest.DIContainerLibraryTest.ResolveCyclingDepencies&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::3965599C-9C7A-40A1-95DD-9A1A96268B3A::net5.0::LibraryTest.DIContainerLibraryTest.ResolveEnumerable&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ee4cc163_002D7117_002D498b_002Dae6b_002Dceb6925aa7e0/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ResolveCyclingDepencies" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::3965599C-9C7A-40A1-95DD-9A1A96268B3A::net5.0::LibraryTest.DIContainerLibraryTest.ResolveCyclingDepencies&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::3965599C-9C7A-40A1-95DD-9A1A96268B3A::net5.0::LibraryTest.DIContainerLibraryTest.ResolveEnumerable&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	</wpf:ResourceDictionary>
