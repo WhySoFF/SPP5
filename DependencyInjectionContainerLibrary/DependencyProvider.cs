@@ -12,12 +12,14 @@ namespace DependencyInjectionContainerLibrary
         private DependencyConfiguration _configuration;
 
         public List<Type> listInstances;
+        public List<object> listPoint;
 
         public DependencyProvider(DependencyConfiguration configuration)
         {
             _configuration = configuration;
             listInstances = new List<Type>();
-           
+            listPoint = new List<object>();
+
         }
         
         public Object Resolve<TType>() where TType : class
@@ -37,12 +39,12 @@ namespace DependencyInjectionContainerLibrary
                     return list.AsEnumerable();
                 }
             }
-            
+
             if (_configuration.HasType(type))
             {
                 Implementation implementation = _configuration.GetFirstImplementation(type);
                 object obj = Resolve(implementation);
-                
+                searchPointInstance();
                 return obj as TType;
             }
 
@@ -57,6 +59,7 @@ namespace DependencyInjectionContainerLibrary
                 }
             }
             
+            
             throw new UnsupportedTypeException("Unsupported type: " + type.FullName);
         }
 
@@ -70,14 +73,35 @@ namespace DependencyInjectionContainerLibrary
                 if (parameters.All(param => _configuration.HasType(param.ParameterType)))
                 {
                     Object value;
-                    
-                        value = constructorInfo.Invoke(parameters.Select(param => Resolve(_configuration.GetFirstImplementation(param.ParameterType))).ToArray());
-                        
+
+                    if (instanceWasCreate(parameters))
+                    {
+                        value = constructors[1].Invoke(null);
+                        listPoint.Add(value);
+                    }
+                    else
+                    {
+                        value = constructorInfo.Invoke(parameters.Select(param =>
+                            Resolve(_configuration.GetFirstImplementation(param.ParameterType))).ToArray());
+                    }
                     return value;
                 }
             }
 
             throw new NoSuitableConstructorException("No suitable constructor for type: " + type.FullName);
+        }
+        
+        private bool instanceWasCreate(ParameterInfo[] parameters)
+        {
+            foreach (var param in parameters)
+            {
+                Type type = _configuration.GetFirstImplementation(param.ParameterType).Type;
+                if (listInstances.Contains(type))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private object ResolveOpenGeneric(Type baseType, Type genericArgumentType)
@@ -105,5 +129,21 @@ namespace DependencyInjectionContainerLibrary
 
             return value;
         }
+
+        private void searchPointInstance()
+        {
+            for(int i = 0; i < listPoint.Count; i++) {
+                PropertyInfo[] properties = listPoint[i].GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                foreach (var property in properties)
+                {
+                    Implementation impl = _configuration.GetFirstImplementation(property.PropertyType);
+                    property.SetValue(listPoint[i],Resolve(impl));
+                }
+            }
+            listPoint.Clear();
+            
+        }
+        
+        
     }
 }

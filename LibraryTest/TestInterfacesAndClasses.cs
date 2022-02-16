@@ -46,5 +46,60 @@
             public IRepository Repository { get; set; }
         }
 
+        public interface IA { }
+
+        public class A : IA
+        {
+            public IB b { get; set; }
+
+            
+            public A(IB b)
+            {
+                this.b = b;
+            }
+
+            public A()
+            {
+                
+            }
+            
+            
+        }
+        
+        public interface IB {}
+
+        public class B : IB
+        {
+            public IA a { get; set; }
+            public IC c { get; set; }
+            
+            public IB b { get; set; }
+
+
+            public B(IA a, IC c, IB b)
+            {
+                this.a = a;
+                this.c = c;
+                this.b = b;
+            }
+
+            public B() {}
+        }
+        
+        public interface IC {}
+
+        public class C : IC
+        {
+            public IB b { get; set; }
+
+            
+            public C(IB b)
+            {
+                this.b = b;
+            }
+
+            public C() {}
+        }
+
     }
 }

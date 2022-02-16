@@ -17,13 +17,14 @@ namespace DependencyInjectionContainerLibrary
             }
             _configuration[typeof(TType)].Add(new Implementation(typeof(TImplementation), isSingleton));
         }
-        
+
         public void Register(Type dependency, Type implementation, bool isSingleton = true)
         {
             if (!_configuration.ContainsKey(dependency))
-            { 
+            {
                 _configuration[dependency] = new List<Implementation>();
             }
+
             _configuration[dependency].Add(new Implementation(implementation, isSingleton));
         }
 

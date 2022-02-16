@@ -114,5 +114,25 @@ namespace LibraryTest
             Assert.Throws<NoSuitableConstructorException>(() => provider.Resolve<IService>());
         }
 
+        [Test]
+        public void ResolveCyclingDepencies()
+        {
+            _configuration.Register<IA, A>();
+            _configuration.Register<IB, B>();  
+            _configuration.Register<IC, C>();  
+
+            DependencyProvider provider = new DependencyProvider(_configuration);
+            
+            A a = (A) provider.Resolve<IA>();
+            B b = (B) provider.Resolve<IB>();
+            C c = (C) provider.Resolve<IC>();
+            
+            Assert.AreSame(a, b.a);
+            Assert.AreSame(b.c,c);
+            Assert.AreSame(c.b,b);
+            Assert.AreSame(b, b.b);
+
+        }
+
     }
 }
